@@ -5,12 +5,13 @@ services:
 
 before_install:
   - docker build -t wkmor1/zonation .
-  - docker run -d --name zig-container wkmor1/zonation 
+  - docker run -d --name zig-container wkmor1/zonation
   - docker cp zig-container:zonation.tar.gz .
 
 deploy:
   provider: releases
-  api_key: 
+  api_key:
+    secure: 0tvQw1zKc5tnpnwQm3r0H4d4OwlVdaZk3BGThGZuiKlES2DPlfeAW5Ak9gunHpvS82yMs6qM8zQJ/pUB227oVf+46OUsREyHjgPA4SmZPKDwFtsd6RFfksS/MAgWDiHTM8ndJMov17mtQDPU/EA93GI9WH/KmMq8ZM6T4JEQ+GMGPbP/7/UKSMB7NwXVIRG$
   file: zonation.tar.gz
   skip_cleanup: true
   on:
