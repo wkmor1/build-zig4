@@ -1,0 +1,17 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t wkmor1/zonation .
+  - docker run -d --name zig-container wkmor1/zonation 
+  - docker cp zig-container:zonation.tar.gz .
+
+deploy:
+  provider: releases
+  api_key: 
+  file: zonation.tar.gz
+  skip_cleanup: true
+  on:
+    tags: true
