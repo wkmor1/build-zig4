@@ -1,6 +1,6 @@
 sudo: required
 
-language: c
+language: generic
 
 services:
   - docker
@@ -8,6 +8,8 @@ services:
 before_install:
   - docker build -t wkmor1/zonation .
   - docker run -d --name zig-container wkmor1/zonation
+
+script:
   - docker cp zig-container:zonation.tar.gz .
 
 deploy:
