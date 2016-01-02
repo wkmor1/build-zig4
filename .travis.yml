@@ -8,9 +8,10 @@ services:
 before_install:
   - docker build -t wkmor1/zonation .
   - docker run -d --name zig-container wkmor1/zonation
+  - docker cp zig-container:zonation.tar.gz .
 
 script:
-  - docker cp zig-container:zonation.tar.gz .
+  - ls
 
 deploy:
   provider: releases
