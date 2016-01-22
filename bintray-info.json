@@ -1,0 +1,14 @@
+{
+    "package": {
+         "name": "zonation",
+         "repo": "binaries",
+         "subject": "wkmor1"
+     },
+     "version": {
+          "name": "4.0.0",
+          "desc": "Version 4.0.0"
+     },
+     "files": "zonation.tar.gz",
+     "publish": true
+}
+          
