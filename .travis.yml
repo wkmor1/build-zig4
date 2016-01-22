@@ -1,16 +1,16 @@
 sudo: required
 language: generic
 services:
-- docker
+  - docker
 before_install:
-- docker build -t wkmor1/zonation .
-- docker run -d --name zig-container wkmor1/zonation
-- docker cp zig-container:zonation.tar.gz .
+  - docker build -t wkmor1/zonation .
+  - docker run -d --name zig-container wkmor1/zonation
+  - docker cp zig-container:zonation.tar.gz .
 script:
-- ls
-deploy:
-  provider: bintray
-  file: bintray-info.json
-  bintrayUser: wkmor1
-  bintrayApiKey:
-    - secure: dHVkAfYihcBUp1h2oNaDF4/qOFYg2jKnFg5ZtzfRzrikIChLnisfW2dG/y3yMnEhpVpppJa9kgdrVCJUOKQlp0oI5etZTekDEOLuasMoaw82nsFG+gXgmJYRc/BNl+RKJkNhIgggvLsW5bTS2LyIxrHWZePCebIq2RtKPnXKtgfDeuqwNcIsoeXORQyTnwQyOteE+gV8FvVBkyckI3YZaPJ0tSktUHlRMuDZqQuk0IHrhkt4acATxM4jaARsIEvvH8m4Oy6bg5LSbn5E/S+zidvBzrvcZDbOgMoX2CXJvNYyhQhCbCSks38C+fecLheYcrOVGZnBDlHbr1Q6HE5axYsDUv/MwzOLQRSk1RSgvCMhUpnE8c/UxjRLx636bp4QAPwkTg/wM22lbObqq1XJdFXMoD83Bx9GQdfvlzplTvPz+c1tlqQG5XFz97cjK8IGudNRue29M0DD/y95Bu6F8jqCrAz7zAmNKa5Ltl5L9K3vwmaQWtFUHcvtv+5ACQIU4GXtfMIv7ANPaZzViUyQo1vxq+UaNN3aSLnU8wCB4uEOZh/EL9MxgodRt3GdOOWGimizKinUNUQ3Le4Ow+NLUagqbWCC+jHc/NRp1SoFqBe5KO7KY2q5ik+Y0P8bxXdQ0pEVFKwikmMrxx3RcXcMdvQZOfRnVHN+ia4oCeMKbmY=
+  - ls
+env:
+  global:
+    - secure: "IGcwWOlEG3xFZcTas0H7z0rhLXqBDHoCd0XShWI3b/uXTNG+UpZyTHzla8gJ2JQDjXiy1gTzdsbHr7Cs/W8+Oe6DPiGhYDEVTXF5epUpTiVeBH746ZpUi++D4TBZJhBZbeqOnQKD2NZVFHqib+M9rxBDSOYNLyf2Bx8L0GCqYNt3Yxh2g1mXRurwG7/BwlnHh99aQxS6QVYkpZ75GAIhBpZml1KVrSWp6BAZP2RisYpP/5jHCDoFWux2/0XQ8uZABjyHPJDWfsE4JeNmtmy7ppvkYV7Upw1Vml1U6n01LxPmqsO+PsORG7E0NADRf6J8GT0iyKxCvRwMuznrRMPNyXRHKiIKX94r1Mn8K+OkROrbOd6RHoM2/CConipJbIlRoFTxLI6HcAxl49+OnQmUj4BsATQWbTLiypHm+h+S2AjzV2qgEClophPHjquF2HSJry9QNs4hCYRylyyuXHUBBskvwpM/aMh/+j46bOnwV8/DIOqNFFtA2NBSSukR0ofFQz/KC4KGh4Bp37Bx2/SssHh1HOJneAQW6I/LZLWUcIYR76Hgou4dMLnAeCadgs3OMTcceSaHMFQSToydFudLV+KFYXKB3wCSwHD7WKDYoHj1T0hz8qJZ5CjuArDEnTc+hGW57wbk1qlG3ckghuZliA50BvzaTYmqxUpNK1r2ip0="
+after_success:
+  - curl -T zonation.tar.gz -uwkmor1:${bintrayApiKey} https://api.bintray.com/content/wkmor1/binaries/zonation/4.0.0/zonation.tar.gz
+  - curl -vvf -uwkmor1:${bintrayApiKey} -H "Content-Type: application/json" -X POST https://api.bintray.com/content/wkmor1/binaries/zonation/4.0.0/publish --data "{ \"discard\": \"false\" }"
