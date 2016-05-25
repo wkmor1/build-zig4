@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:trusty
 MAINTAINER William K Morris <wkmor1@gmail.com>
 
 RUN    apt-get update \
