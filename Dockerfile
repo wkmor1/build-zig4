@@ -1,5 +1,4 @@
 FROM ubuntu:trusty
-MAINTAINER William K Morris <>
 
 RUN    apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -11,13 +10,17 @@ RUN    apt-get update \
          libgdal-dev \
          libfftw3-dev \
          libqt4-dev \
-         libqwt-dev
+         libqwt-dev \
+    && apt-get clean \
+    && apt-get autoremove \
+    && rm -rf var/lib/apt/lists/*
 
-ENV PATH $PATH:build/zig4
+ENV PATH $PATH:zig4
 
 RUN    git clone https://github.com/cbig/zonation-core \
     && mkdir build \
     && cd build \
     && cmake ../zonation-core \
     && make \
-    && tar czf ../zonation.tar.gz .
+    && cd .. \
+    && rm -rf zonation-core
