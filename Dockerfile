@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-MAINTAINER William K Morris <wkmor1@gmail.com>
+MAINTAINER William K Morris <>
 
 RUN    apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -12,6 +12,8 @@ RUN    apt-get update \
          libfftw3-dev \
          libqt4-dev \
          libqwt-dev
+
+ENV PATH $PATH:build/zig4
 
 RUN    git clone https://github.com/cbig/zonation-core \
     && mkdir build \
