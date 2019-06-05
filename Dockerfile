@@ -15,7 +15,7 @@ RUN    apt-get update \
     && apt-get autoremove \
     && rm -rf var/lib/apt/lists/*
 
-ENV PATH $PATH:zig4
+ENV PATH $PATH:/build/zig4
 
 RUN    git clone https://github.com/cbig/zonation-core \
     && mkdir build \
