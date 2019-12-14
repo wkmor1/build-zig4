@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM debian
 
 RUN    apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -18,9 +18,6 @@ RUN    apt-get update \
 ENV PATH $PATH:/build/zig4
 
 RUN    git clone https://github.com/cbig/zonation-core \
-    && cd zonation-core \
-    && git checkout bcb4e612f59342c2931886dd930aac0051f79fe0 \
-    && cd .. \
     && mkdir build \
     && cd build \
     && cmake ../zonation-core \
