@@ -1,11 +1,11 @@
-FROM debian
+FROM debian:buster
 
 RUN    apt-get update \
     && apt-get install -y --no-install-recommends \
-         build-essential\
+         build-essential \
          ca-certificates \
          cmake \
-         git\
+         git \
          libboost-all-dev \
          libgdal-dev \
          libfftw3-dev \
@@ -24,3 +24,4 @@ RUN    git clone https://github.com/cbig/zonation-core \
     && make \
     && cd .. \
     && rm -rf zonation-core
+
